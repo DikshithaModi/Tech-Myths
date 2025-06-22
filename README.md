@@ -82,25 +82,6 @@ Here's a sample `README.md` for your Tech Myths website. This version includes a
    ```
    http://localhost:3000
    ```
-
----
-
-## 📂 Folder Structure
-
-```
-tech-myths/
-├── public/
-│   ├── css/
-│   ├── js/
-│   ├── images/
-│   └── index.html
-├── routes/
-├── views/
-├── db/
-├── app.js
-└── README.md
-```
-
 ---
 
 ## 🤝 Contributing
