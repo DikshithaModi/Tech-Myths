@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tech Myths</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .btn-custom {
+        background-color: #08417e;
+        color: white;
+      }
+      .btn-custom:hover {
+        background-color: #062d5e;
+        color: white;
+      }
+
+      #chatbot-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #08417e;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      df-messenger {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        z-index: 9999;
+        --df-messenger-button-titlebar-color: #08417e;
+        --df-messenger-chat-background-color: #f4f4f4;
+        --df-messenger-font-color: #000;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 350px !important;
+        height: 500px !important;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #08417e;">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold lh-1" href="#">Tech Myths</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+            <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+            <li class="nav-item">
+              <a href="#" class="nav-link active" data-bs-toggle="modal" data-bs-target="#submitBlogModal">Submit Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container my-5">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h1 class="display-4 fw-bold">
+            Tech Myths: <br />
+            Busting the Buzz
+          </h1>
+          <p class="lead fw-semibold">
+            Breaking the myths that hold tech<br />
+            beginners back.
+          </p>
+          <a href="blog.html" class="btn btn-custom btn-lg">Read Latest Myths</a>
+        </div>
+        <div class="col-md-6">
+          <img src="file.svg" class="img-fluid" alt="Tech Myths Illustration" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Blog Modal -->
+    <div class="modal fade" id="submitBlogModal" tabindex="-1" aria-labelledby="submitBlogModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="submitBlogModalLabel">Submit Your Tech Blog</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-0">
+           <iframe
+                id="submitBlogForm"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfMG9BmpaI4aaXhZioKHcuMRsM344ot0c7tfwYg0Uh25a1XvQ/viewform?embedded=true"
+                title="Submit Your Tech Blog"
+                style="width: 100%; height: 80vh; border: none;"
+              >
+             Loading…
+            </iframe>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div class="modal fade" id="newsletterModal" tabindex="-1" aria-labelledby="newsletterModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="newsletter-form">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newsletterModalLabel">Join Our Newsletter</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Stay updated with the latest myth-busting tech tips!</p>
+              <input
+                type="email"
+                name="email"
+                class="form-control mb-3"
+                placeholder="Enter your email"
+                required
+              />
+              <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle">💬</button>
+
+    <!-- Dialogflow Messenger Chatbot -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="BuzzBreakBot"
+      agent-id="9dfe9945-6672-4171-8c6b-cfa1136414b1"
+      language-code="en"
+    ></df-messenger>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Show newsletter modal after 5 seconds
+      window.onload = function () {
+        setTimeout(() => {
+          const modal = new bootstrap.Modal(document.getElementById("newsletterModal"));
+          modal.show();
+        }, 5000);
+      };
+
+      // Toggle Chatbot visibility
+      const chatbotBtn = document.getElementById("chatbot-toggle");
+      const dfMessenger = document.querySelector("df-messenger");
+
+      chatbotBtn.addEventListener("click", () => {
+        if (dfMessenger.style.display === "none" || dfMessenger.style.display === "") {
+          dfMessenger.style.display = "block";
+        } else {
+          dfMessenger.style.display = "none";
+        }
+      });
+
+      // Newsletter form submission with fetch
+      document.getElementById('newsletter-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = e.target.email.value;
+
+        try {
+          const response = await fetch('http://localhost:3000/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert(data.message);
+            e.target.reset();
+            const newsletterModal = bootstrap.Modal.getInstance(document.getElementById('newsletterModal'));
+            newsletterModal.hide();
+          } else {
+            alert(data.error || 'Subscription failed.');
+          }
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      });
+    </script>
+  </body>
+</html>
